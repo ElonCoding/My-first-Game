@@ -13,6 +13,10 @@ const BALL_SPEED = 6;
 
 // Game objects
 let playerY = (canvas.height - PADDLE_HEIGHT) / 2;
+
+// Keyboard input
+let upArrowPressed = false;
+let downArrowPressed = false;
 let aiY = (canvas.height - PADDLE_HEIGHT) / 2;
 let ball = {
     x: canvas.width / 2,
@@ -53,6 +57,16 @@ function resetBall() {
 }
 
 function update() {
+    // Move player paddle based on keyboard input
+    if (upArrowPressed) {
+        playerY -= PADDLE_SPEED;
+    }
+    if (downArrowPressed) {
+        playerY += PADDLE_SPEED;
+    }
+    // Clamp player paddle within canvas
+    playerY = Math.max(0, Math.min(canvas.height - PADDLE_HEIGHT, playerY));
+
     // Move ball
     ball.x += ball.vx;
     ball.y += ball.vy;
@@ -134,7 +148,30 @@ function render() {
     drawText(aiScore, (canvas.width * 3) / 4, 50, "#fff");
 }
 
-// Mouse movement for player paddle
+// Keyboard input for player paddle
+document.addEventListener('keydown', function(evt) {
+    switch (evt.key) {
+        case 'ArrowUp':
+            upArrowPressed = true;
+            break;
+        case 'ArrowDown':
+            downArrowPressed = true;
+            break;
+    }
+});
+
+document.addEventListener('keyup', function(evt) {
+    switch (evt.key) {
+        case 'ArrowUp':
+            upArrowPressed = false;
+            break;
+        case 'ArrowDown':
+            downArrowPressed = false;
+            break;
+    }
+});
+
+// Mouse movement for player paddle (optional, can be removed if only keyboard is desired)
 canvas.addEventListener('mousemove', function(evt) {
     const rect = canvas.getBoundingClientRect();
     let mouseY = evt.clientY - rect.top;
