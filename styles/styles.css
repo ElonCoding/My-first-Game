@@ -1,7 +1,7 @@
 body {
     background: #16bd2f;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 20px;
     padding: 50px;
     display: flex;
@@ -10,9 +10,13 @@ body {
     align-items: center;
     min-height: 100vh;
 }
-
+h1 { 
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 24px;
+}
 #pong {
-    background: #222;
+    background: #38fc02;
     display: block;
     margin: 0 auto;
     border: 4px solid #444;
@@ -25,5 +29,13 @@ body {
 
 #controls {
     margin-top: 24px;
+}
+
+#highscore {
+    margin-top: 24px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif  ;
 }
 

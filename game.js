@@ -9,7 +9,7 @@ const PLAYER_X = 20;
 const AI_X = canvas.width - PADDLE_WIDTH - 20;
 const PADDLE_SPEED = 6;
 const AI_SPEED = 5;
-const BALL_SPEED = 6;
+const BALL_SPEED = 5;
 
 // Game objects
 let playerY = (canvas.height - PADDLE_HEIGHT) / 2;
@@ -28,6 +28,7 @@ let ball = {
 // Score
 let playerScore = 0;
 let aiScore = 0;
+let highScore = 0; // New high score variable
 
 // Draw functions
 function drawRect(x, y, w, h, color) {
@@ -113,6 +114,9 @@ function update() {
     }
     if (ball.x + BALL_RADIUS > canvas.width) {
         playerScore++;
+        if (playerScore > highScore) {
+            highScore = playerScore;
+        }
         resetBall();
     }
 
@@ -146,6 +150,9 @@ function render() {
     // Draw scores
     drawText(playerScore, canvas.width / 4, 50, "#fff");
     drawText(aiScore, (canvas.width * 3) / 4, 50, "#fff");
+
+    // Update high score display
+    document.getElementById('highscore').innerText = 'High Score: ' + highScore;
 }
 
 // Keyboard input for player paddle
