@@ -178,6 +178,27 @@ document.addEventListener('keyup', function(evt) {
     }
 });
 
+// Touch input for player paddle
+canvas.addEventListener('touchstart', function(evt) {
+    const rect = canvas.getBoundingClientRect();
+    let touchY = evt.touches[0].clientY - rect.top;
+    playerY = touchY - PADDLE_HEIGHT / 2;
+    evt.preventDefault(); // Prevent scrolling
+}, { passive: false });
+
+canvas.addEventListener('touchmove', function(evt) {
+    const rect = canvas.getBoundingClientRect();
+    let touchY = evt.touches[0].clientY - rect.top;
+    playerY = touchY - PADDLE_HEIGHT / 2;
+    // Clamp within canvas
+    playerY = Math.max(0, Math.min(canvas.height - PADDLE_HEIGHT, playerY));
+    evt.preventDefault(); // Prevent scrolling
+}, { passive: false });
+
+canvas.addEventListener('touchend', function(evt) {
+    evt.preventDefault(); // Prevent scrolling
+}, { passive: false });
+
 // Mouse movement for player paddle (optional, can be removed if only keyboard is desired)
 canvas.addEventListener('mousemove', function(evt) {
     const rect = canvas.getBoundingClientRect();
